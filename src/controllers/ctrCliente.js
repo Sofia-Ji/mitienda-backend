@@ -34,18 +34,19 @@ ctrCliente.buscarNom = async (req,res) =>{
 
 //Actualizar datos 
 ctrCliente.actualizar = async(req,res) =>{
-    const{_id, ...body} = res.body;
+    const{_id, ...body} = req.body;
     await cliente
     .updateOne({_id : _id},{$set : body})
-    .then()
-    .catch()
+    .then(data => res.json(data))
+    .catch(err => res.json(err))
 }
 
 // Delete
 ctrCliente.eliminar = async(req,res) =>{
     await cliente
-    .delete0ne({_id:req.params.id})
+    .deleteOne({_id:req.params.id})
     .then(data => res.json(data))
     .catch(err => res.json(err))
+    
 }
 module.exports = ctrCliente
